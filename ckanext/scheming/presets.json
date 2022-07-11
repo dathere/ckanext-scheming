@@ -97,6 +97,15 @@
       }
     },
     {
+      "preset_name": "multiple_select_tags",
+      "values": {
+        "form_snippet": "multiple_select_tags.html",
+        "display_snippet": "multiple_choice_tags.html",
+        "validators": "scheming_multiple_choice_tags tag_string_convert",
+        "output_validators": "scheming_multiple_choice_tags_output"
+      }
+    },
+    {
       "preset_name": "date",
       "values": {
         "form_snippet": "date.html",
