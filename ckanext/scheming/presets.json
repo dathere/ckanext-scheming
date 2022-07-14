@@ -34,6 +34,19 @@
       }
     },
     {
+      "preset_name": "tag_string_autocomplete_hidden",
+      "values": {
+        "validators": "ignore_missing tag_string_convert",
+        "classes": ["control-full", "hidden"],
+        "form_attrs": {
+          "data-module": "autocomplete",
+          "data-module-tags": "",
+          "data-module-source": "/api/2/util/tag/autocomplete?incomplete=?",
+          "class": ""
+        }
+      }
+    },
+    {
       "preset_name": "dataset_organization",
       "values": {
         "validators": "owner_org_validator unicode_safe",

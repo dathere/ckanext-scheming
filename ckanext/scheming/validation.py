@@ -387,12 +387,15 @@ def scheming_multiple_choice_output(value):
 @register_validator
 def scheming_multiple_choice_tags_output(value):
     """
-    return stored comma separated list as a proper list
+    return stored comma separated string list as a proper list
     """
     if isinstance(value, list):
-        return value.lower()
+        return value
     try:
-        return value.lower().split( "," )
+        if len(value) == 0:
+            return []
+        else:
+            return value.split( "," )
     except ValueError:
         return [value]
 
