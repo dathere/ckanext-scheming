@@ -128,7 +128,8 @@ def scheming_multiple_choice(field, schema):
 
         selected = set()
         for element in value:
-            if element in choice_values:
+            # if choice_values is empty, presume element is valid
+            if not choice_values or element in choice_values :
                 selected.add(element)
                 continue
             errors[key].append(_('unexpected choice "%s"') % element)
