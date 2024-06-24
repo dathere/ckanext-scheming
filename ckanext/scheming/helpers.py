@@ -433,3 +433,15 @@ def scheming_flatten_subfield(subfield, data):
         for k in record:
             flat[prefix + k] = record[k]
     return flat
+
+@helper
+def twdh_scheming_groups_choices(dummy_var='none'):
+    """Return a list of groups for scheming choices helper"""
+    import ckan.plugins.toolkit as toolkit
+    groups = toolkit.get_action('group_list')({}, {'all_fields': True})
+
+    group_choices = [{
+        'value': g['name'],
+        'label': g['display_name']
+    } for g in groups]
+    return group_choices
