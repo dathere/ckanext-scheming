@@ -80,7 +80,7 @@ dataset_fields:
   display_snippet: email.html
   display_email_name_field: maintainer
 
-- field_name: dpp_suggestion
+- field_name: dpp_suggestions
   label: DPP Suggestion
   preset: json_object
 

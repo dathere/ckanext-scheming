@@ -489,15 +489,15 @@ def scheming_get_suggestion_value(formula, data=None, errors=None, lang=None):
         logger.info(f"Data passed to scheming_get_suggestion_value: {data}")
         
         # Check if dpp_suggestions exists and has the package section
-        if (package_data and 'dpp_suggestion' in package_data and 
-            isinstance(package_data['dpp_suggestion'], dict) and
-            'package' in package_data['dpp_suggestion']):
+        if (package_data and 'dpp_suggestions' in package_data and 
+            isinstance(package_data['dpp_suggestions'], dict) and
+            'package' in package_data['dpp_suggestions']):
             
             # Get the suggestion value if it exists
             logger
-            if field_name in package_data['dpp_suggestion']['package']:
-                logger.info(f"Suggestion value found for field '{field_name}': {package_data['dpp_suggestion']['package'][field_name]}")
-                return package_data['dpp_suggestion']['package'][field_name]
+            if field_name in package_data['dpp_suggestions']['package']:
+                logger.info(f"Suggestion value found for field '{field_name}': {package_data['dpp_suggestions']['package'][field_name]}")
+                return package_data['dpp_suggestions']['package'][field_name]
         
         # No suggestion value found
         return ''
