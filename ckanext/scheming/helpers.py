@@ -7,7 +7,7 @@ import json
 import six
 
 from jinja2 import Environment
-from ckantoolkit import config, _
+from ckan.plugins.toolkit import config, _, h
 
 from ckanapi import LocalCKAN, NotFound, NotAuthorized
 
@@ -24,7 +24,6 @@ def helper(fn):
 def lang():
     # access this function late in case ckan
     # is not set up fully when importing this module
-    from ckantoolkit import h
     return h.lang()
 
 
@@ -77,7 +76,6 @@ def scheming_field_choices(field):
     if 'choices' in field:
         return field['choices']
     if 'choices_helper' in field:
-        from ckantoolkit import h
         choices_fn = getattr(h, field['choices_helper'])
         return choices_fn(field)
 
@@ -209,6 +207,18 @@ def scheming_get_dataset_schema(dataset_type, expanded=True):
     schemas = scheming_dataset_schemas(expanded)
     if schemas:
         return schemas.get(dataset_type)
+
+
+@helper
+def scheming_get_dataset_form_pages(dataset_type):
+    """
+    Return the dataset fields for dataset_type grouped into
+    separate pages based on start_form_page values, or []
+    if no pages were defined
+    """
+    from ckanext.scheming.plugins import SchemingDatasetsPlugin as p
+    if p.instance:
+        return p.instance._dataset_form_pages.get(dataset_type)
 
 
 @helper
@@ -397,8 +407,6 @@ def scheming_render_from_string(source, **kwargs):
     # Temporary solution for rendering defaults and including the CKAN
     # helpers. The core CKAN lib does not include a string rendering
     # utility that works across 2.6-2.8.
-    from ckantoolkit import h
-
     env = Environment(autoescape=True)
     template = env.from_string(
         source,
