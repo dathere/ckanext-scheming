@@ -23,10 +23,7 @@
   </div>
 {% endset %}
 
-{% set field_attrs = field.get('form_attrs', {}) %}
-{% if is_preformulated %}
-  {% do field_attrs.update({"readonly": "readonly"}) %}
-{% endif %}
+
 
 {% call form.input(
     field.field_name,
