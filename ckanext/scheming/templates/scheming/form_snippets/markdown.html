@@ -31,7 +31,6 @@
     placeholder=h.scheming_language_text(field.form_placeholder),
     value=data[field.field_name],
     error=errors[field.field_name],
-    attrs=dict({"class": "form-control markdown-editor"}, **field_attrs),
     is_required=h.scheming_field_required(field)
     )
 %}
