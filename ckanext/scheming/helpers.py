@@ -480,14 +480,13 @@ def scheming_field_suggestion(field):
 
 
 @helper
-def scheming_get_suggestion_value(formula, data=None, errors=None, lang=None):
+def scheming_get_suggestion_value(field_name, data=None, errors=None, lang=None):
     if not data:
         return ''
     
     try:
-        # Extract field name from formula
-        field_name = formula
-        logger.info(f"Field name extracted from formula: {field_name}")
+        # Log the field name
+        logger.info(f"Field name extracted: {field_name}")
         
         # Get package data (where dpp_suggestions is stored)
         package_data = data
