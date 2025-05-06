@@ -85,38 +85,26 @@ ckan.module('scheming-suggestions', function($) {
           var formula = $(this).data('formula');
           var $copyBtn = $(this);
           
-          // Create a temp textarea to copy from
-          var $temp = $("<textarea>");
-          $("body").append($temp);
-          $temp.val(formula).select();
-          
-          try {
-            // Execute copy command
-            var successful = document.execCommand('copy');
+          // Use Clipboard API to copy formula
+          navigator.clipboard.writeText(formula).then(function() {
+            // Show success state
+            $copyBtn.addClass('copy-success');
             
-            if (successful) {
-              // Show success state
-              $copyBtn.addClass('copy-success');
-              
-              // Store original content
-              var $icon = $copyBtn.find('svg');
-              var originalHtml = $icon.html();
-              
-              // Show checkmark
-              $icon.html('<path d="M20 6L9 17l-5-5"></path>');
-              
-              // Reset after 2 seconds
-              setTimeout(function() {
-                $copyBtn.removeClass('copy-success');
-                $icon.html(originalHtml);
-              }, 2000);
-            }
-          } catch (err) {
+            // Store original content
+            var $icon = $copyBtn.find('svg');
+            var originalHtml = $icon.html();
+            
+            // Show checkmark
+            $icon.html('<path d="M20 6L9 17l-5-5"></path>');
+            
+            // Reset after 2 seconds
+            setTimeout(function() {
+              $copyBtn.removeClass('copy-success');
+              $icon.html(originalHtml);
+            }, 2000);
+          }).catch(function(err) {
             console.error('Could not copy formula: ', err);
-          }
-          
-          // Remove temp textarea
-          $temp.remove();
+          });
         });
         
         // Handle apply suggestion button
