@@ -537,3 +537,70 @@ def is_preformulated_field(field):
     This helper returns True only if the field has a 'formula' key with a non-empty value
     """
     return bool(field.get('formula', False))
+
+
+
+
+@helper
+def scheming_has_ai_suggestion_fields(schema):
+    """
+    Check if the schema has any fields that support AI suggestions
+    
+    Args:
+        schema: The schema dictionary
+        
+    Returns:
+        bool: True if any field supports AI suggestions, False otherwise
+    """
+    if not schema:
+        return False
+        
+    if 'dataset_fields' in schema:
+        for field in schema['dataset_fields']:
+            if field.get('ai_suggestion', False):
+                return True
+                
+    if 'resource_fields' in schema:
+        for field in schema['resource_fields']:
+            if field.get('ai_suggestion', False):
+                return True
+                
+    return False
+
+@helper
+def scheming_field_supports_ai_suggestion(field):
+    """
+    Check if a field supports AI suggestions
+    
+    Args:
+        field: The field dictionary from the schema
+        
+    Returns:
+        bool: True if the field supports AI suggestions, False otherwise
+    """
+    return field.get('ai_suggestion', False)
+
+@helper
+def scheming_get_ai_suggestion_value(field_name, data=None):
+    """
+    Get a dummy AI suggestion value for a field
+    
+    Args:
+        field_name: Name of the field
+        data: Form data dictionary (unused in dummy implementation)
+        
+    Returns:
+        str: A dummy AI suggestion value
+    """ 
+    suggestions = {
+        'title': "AI-Generated Dataset Title",
+        'notes': "This dataset contains various metrics and measurements collected from multiple sources. The data is structured in a tabular format with columns for dates, locations, and values.",
+        'tag_string': "ai, data, analytics, metrics",
+        'spatial_extent': "POLYGON((-122.4194 37.7749, -122.4194 37.8049, -122.3894 37.8049, -122.3894 37.7749, -122.4194 37.7749))",
+        'name': "Resource Data File",
+        'description': "This dataset contains comprehensive non-emergency service request records from New York City's 311 system, spanning from [LIKELY_START_DATE] to [LIKELY_END_DATE]. Each record represents a citizen-reported issue or service request submitted through the 311 call center, mobile app, or web portal. The data includes detailed categorization of request types across multiple domains including noise complaints, housing conditions, street/sidewalk issues, sanitation problems, and transportation concerns. Each record contains temporal data (created date, closed date, resolution time), spatial information (borough, community district, census tract, neighborhood, latitude/longitude coordinates), and administrative details (agency assigned, current status, resolution description)."
+    }
+    
+    return suggestions.get(field_name, f"AI-Generated suggestion for {field_name}")
+
+    

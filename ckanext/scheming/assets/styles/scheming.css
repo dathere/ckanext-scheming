@@ -44,6 +44,7 @@ a.btn.btn-multiple-remove {
 .form-label label::after {
   content: none !important; 
 }
+/* --- General Suggestion UI Enhancements --- */
 .control-group.has-suggestion .control-label {
   position: relative; /* For potential loader positioning */
   display: flex; /* To align label text and button nicely */
@@ -124,6 +125,7 @@ a.btn.btn-multiple-remove {
 }
 
 
+/* --- Custom Popover Modernization --- */
 .custom-suggestion-popover {
   max-width: 380px;
   width: auto;
@@ -133,15 +135,15 @@ a.btn.btn-multiple-remove {
   box-shadow: 0 8px 24px rgba(0,0,0,0.12), 0 4px 10px rgba(0,0,0,0.08);
   padding: 18px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.5; 
+  line-height: 1.5; /* Improved line height for readability */
 }
-.custom-suggestion-popover:before { display: none; } 
+.custom-suggestion-popover:before { display: none; } /* Removed default arrow */
 
 .suggestion-popover-content strong {
   display: block;
   margin-bottom: 12px;
   color: #212529;
-  font-size: 17px;
+  font-size: 17px; /* Slightly larger title */
   font-weight: 600;
 }
 
@@ -160,6 +162,7 @@ a.btn.btn-multiple-remove {
   overflow-y: auto;
 }
 
+/* Formula Toggle & Display */
 .formula-toggle { margin: 10px 0 5px 0; }
 .formula-toggle-btn {
   background: none; border: none; color: #007bff; font-size: 13px;
@@ -333,8 +336,160 @@ input.formula-apply-error, textarea.formula-apply-error, select.formula-apply-er
   border-radius: 3px;
 }
 
+/* Fix for colon issue (from original CSS) */
+.form-label label::after,
+.control-label-with-suggestion label:after,
+label:after,
+.control-label-with-suggestion .form-label::after {
+  content: none !important;
+}
 
+/* Ensure the icon for preformulated field is vertically aligned */
 #dataset-edit div[class*="control-group"] > label > span.preformulated-icon > svg {
-  vertical-align: middle; 
+  vertical-align: middle; /* Better alignment */
   margin-left: 5px;
+}
+
+
+
+/* Add to /ckanext/scheming/assets/styles/scheming.css */
+
+/* AI Suggestion button on fields */
+.ai-suggestion-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  margin-left: 8px;
+  border: none;
+  background-color: transparent;
+  color: #4a86e8;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  top: -1px;
+}
+
+.ai-suggestion-btn:hover, .ai-suggestion-btn:focus {
+  transform: scale(1.2);
+  outline: none;
+}
+
+.ai-suggestion-btn svg {
+  height: 30px;
+  fill: #2f9eff;
+  stroke: #0040ff;
+}
+
+
+/* AI Suggestion popover */
+.ai-suggestion-popover {
+  max-width: 350px;
+  position: absolute;
+  background-color: #fff;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.08);
+  padding: 16px;
+  z-index: 1000;
+}
+
+.ai-suggestion-popover:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  transform: rotate(45deg);
+  top: -6px;
+  left: 15px;
+  box-shadow: -2px -2px 5px rgba(0,0,0,0.05);
+}
+
+.ai-suggestion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ai-suggestion-header strong {
+  color: #4a86e8;
+  font-size: 16px;
+}
+
+.ai-suggestion-source {
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+}
+
+/* AI Suggestion context section */
+.ai-suggestion-context-section {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.ai-suggestion-context-label {
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.ai-suggestion-context {
+  width: 100%;
+  min-height: 60px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  resize: vertical;
+}
+
+.ai-suggestion-regenerate-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #4a86e8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  font-size: 13px;
+}
+
+.ai-suggestion-regenerate-btn:hover {
+  background-color: #3a76d8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(74, 134, 232, 0.3);
+}
+
+.ai-suggestion-regenerate-btn.regenerating {
+  background-color: #999;
+  transform: none;
+  box-shadow: none;
+  cursor: wait;
+}
+
+.ai-suggestion-regenerate-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: #fff;
+}
+
+/* AI Suggestion apply button styling */
+.ai-suggestion-apply-btn {
+  background-color: #4a86e8 !important; /* Override the regular suggestion button color */
+}
+
+.ai-suggestion-apply-btn:hover {
+  background-color: #3a76d8 !important; /* Darker on hover */
 }

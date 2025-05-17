@@ -20,23 +20,23 @@ dataset_fields:
   label: Description
   form_snippet: markdown.html
   form_placeholder: eg. Some useful notes/blurb about the data
-  suggestion_formula: Latitudinal range {{ (dpps[dpp.LAT_FIELD].stats.max|float) - (dpps[dpp.LAT_FIELD].stats.min|float) }} {{"the quick brown fox"|truncate_with_ellipsis(5)}}
+  suggestion_formula: Latitudinal range {{ (dpps[dpp.LAT_FIELD].stats.max|float) - (dpps[dpp.LAT_FIELD].stats.min|float) }} 
   
 - field_name: spatial_extent
   label: Spatial Extent
   form_snippet: markdown.html
-  suggestion_formula: '{{ spatial_extent_wkt(resource.LONGITUDE.stats.min, resource.LATITUDE.stats.min, resource.LONGITUDE.stats.max, resource.LATITUDE.stats.max) }}'
+  suggestion_formula: '{{ spatial_extent_wkt() }}'
 
-- field_name: test_field
-  label: Test Field
+- field_name: description
+  label: Description AI
   form_snippet: markdown.html
-  formula: 'Test field value:{{package.author}}: {{package.author_email}}'
+  ai_suggestion: true 
 
 - field_name: frequency_info
   label: Frequency Information
   form_snippet: markdown.html
   form_placeholder: eg. Daily, Weekly, Monthly, Annually, etc.
-  formula: '{{ get_frequency_top_values("LATITUDE") }}'
+  formula: '{{ get_frequency_top_values("Agency") }}'
 
 - field_name: tag_string
   label: Tags
