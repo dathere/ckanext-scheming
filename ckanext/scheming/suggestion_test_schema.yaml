@@ -22,6 +22,14 @@ dataset_fields:
   form_placeholder: eg. Some useful notes/blurb about the data
   suggestion_formula: Latitudinal range {{ (dpps[dpp.LAT_FIELD].stats.max|float) - (dpps[dpp.LAT_FIELD].stats.min|float) }} 
   
+
+- field_name: group
+  label: Categories
+  preset: multiple_checkbox
+  choices_helper: twdh_scheming_groups_choices
+  required: False
+  help_text: Broad categories these data fall within. For data curation purposes, users should be a member of the category to add a dataset to the category.
+
 - field_name: spatial_extent
   label: Spatial Extent
   form_snippet: markdown.html

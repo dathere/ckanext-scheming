@@ -5,7 +5,6 @@ import datetime
 import pytz
 import json
 import six
-import logging
 
 from jinja2 import Environment
 from ckan.plugins.toolkit import config, _, h
@@ -13,7 +12,6 @@ from ckan.plugins.toolkit import config, _, h
 from ckanapi import LocalCKAN, NotFound, NotAuthorized
 
 all_helpers = {}
-logger = logging.getLogger(__name__)
 
 def helper(fn):
     """
@@ -269,7 +267,6 @@ def scheming_get_organization_schema(organization_type, expanded=True):
     schemas = scheming_organization_schemas(expanded)
     if schemas:
         return schemas.get(organization_type)
-
 
 @helper
 def scheming_get_schema(entity_type, object_type, expanded=True):
